@@ -17,6 +17,7 @@ pub fn build(b: *std.Build) !void {
     if (add_paths) try addAppleSDK(b, objc);
     objc.linkSystemLibrary("objc", .{});
     objc.linkFramework("Foundation", .{});
+    objc.linkFramework("IOKit", .{});
 
     const tests = b.addTest(.{
         .name = "objc-test",
@@ -26,6 +27,7 @@ pub fn build(b: *std.Build) !void {
     });
     tests.linkSystemLibrary("objc");
     tests.linkFramework("Foundation");
+    tests.linkFramework("IOKit");
     try addAppleSDK(b, &tests.root_module);
     b.installArtifact(tests);
 
